@@ -1,10 +1,13 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import {
 	APIInteraction,
-	APIInteractionDataResolved,
+	APIInteractionDataResolvedChannel,
+	APIInteractionDataResolvedGuildMember,
 	APIMessageChannelSelectInteractionData,
 	APIMessageRoleSelectInteractionData,
-	APIMessageUserSelectInteractionData
+	APIMessageUserSelectInteractionData,
+	APIRole,
+	APIUser
 } from 'discord-api-types/v10';
 
 import { NecordExecutionContext } from '../../../context';
@@ -24,60 +27,60 @@ export const SelectedStrings = createParamDecorator<any, any, string[]>(
 	}
 );
 
-export type ISelectedChannels = APIInteractionDataResolved['channels'];
-export const SelectedChannels = createParamDecorator<any, any, ISelectedChannels>(
+export const SelectedChannels = createParamDecorator<any, any, APIInteractionDataResolvedChannel[]>(
 	(_, ctx: ExecutionContext) => {
 		const necordContext = NecordExecutionContext.create(ctx);
 		const interaction = necordContext.getContext<APIInteraction>();
 
 		if (!isChannelSelectComponentInteraction(interaction)) {
-			return {};
+			return [];
 		}
 
-		return (
-			(interaction.data as APIMessageChannelSelectInteractionData)?.resolved?.channels ?? {}
-		);
+		const data = interaction.data as APIMessageChannelSelectInteractionData;
+		return data?.resolved?.channels ? Object.values(data?.resolved?.channels) : [];
 	}
 );
 
-export type ISelectedUsers = APIInteractionDataResolved['users'];
-export const SelectedUsers = createParamDecorator<any, any, ISelectedUsers>(
+export const SelectedUsers = createParamDecorator<any, any, APIUser[]>(
 	(_, ctx: ExecutionContext) => {
 		const necordContext = NecordExecutionContext.create(ctx);
 		const interaction = necordContext.getContext<APIInteraction>();
 
 		if (!isUserSelectComponentInteraction(interaction)) {
-			return {};
+			return [];
 		}
 
-		return (interaction.data as APIMessageUserSelectInteractionData)?.resolved?.users ?? {};
+		const data = interaction.data as APIMessageUserSelectInteractionData;
+		return data?.resolved?.users ? Object.values(data?.resolved?.users) : [];
 	}
 );
 
-export type ISelectedMembers = APIInteractionDataResolved['members'];
-export const SelectedMembers = createParamDecorator<any, any, ISelectedMembers>(
-	(_, ctx: ExecutionContext) => {
-		const necordContext = NecordExecutionContext.create(ctx);
-		const interaction = necordContext.getContext<APIInteraction>();
+export const SelectedMembers = createParamDecorator<
+	any,
+	any,
+	APIInteractionDataResolvedGuildMember[]
+>((_, ctx: ExecutionContext) => {
+	const necordContext = NecordExecutionContext.create(ctx);
+	const interaction = necordContext.getContext<APIInteraction>();
 
-		if (!isUserSelectComponentInteraction(interaction)) {
-			return {};
-		}
-
-		return (interaction.data as APIMessageUserSelectInteractionData)?.resolved?.members ?? {};
+	if (!isUserSelectComponentInteraction(interaction)) {
+		return [];
 	}
-);
 
-export type ISelectedRoles = APIInteractionDataResolved['roles'];
-export const SelectedRoles = createParamDecorator<any, any, ISelectedRoles>(
+	const data = interaction.data as APIMessageUserSelectInteractionData;
+	return data?.resolved?.members ? Object.values(data?.resolved?.members) : [];
+});
+
+export const SelectedRoles = createParamDecorator<any, any, APIRole[]>(
 	(_, ctx: ExecutionContext) => {
 		const necordContext = NecordExecutionContext.create(ctx);
 		const interaction = necordContext.getContext<APIInteraction>();
 
 		if (!isRoleSelectComponentInteraction(interaction)) {
-			return {};
+			return [];
 		}
 
-		return (interaction.data as APIMessageRoleSelectInteractionData)?.resolved?.roles ?? {};
+		const data = interaction.data as APIMessageRoleSelectInteractionData;
+		return data?.resolved?.roles ? Object.values(data?.resolved?.roles) : [];
 	}
 );
