@@ -1,16 +1,15 @@
 {
-	"name": "necord",
+	"name": "necord-rest",
 	"description": "A module for creating Discord bots using NestJS, based on Discord.js.",
-	"version": "5.4.4",
+	"version": "1.0.0",
 	"scripts": {
-		"build": "rimraf dist && tsc -p tsconfig.json",
-		"prepublish:npm": "npm run build",
+		"build": "rimraf -rf dist && tsc -p tsconfig.json",
+		"prepublish": "npm run build",
 		"publish:npm": "release-it",
-		"prepublish:dev": "npm run build",
 		"publish:dev": "npm publish --access public --tag dev",
 		"prepare": "husky install .github/husky",
 		"format": "prettier --write \"src/**/*.ts\"",
-		"lint": "eslint --ignore-path .gitignore src/**/*.ts",
+		"lint": "eslint \"src/**/*.ts\" && tsc --noEmit",
 		"changelog": "git cliff --prepend ./CHANGELOG.md -l --current -c ./cliff.toml -r ."
 	},
 	"lint-staged": {
@@ -48,7 +47,9 @@
 		"Alexey Filippov <socket.someone@gmail.com>"
 	],
 	"dependencies": {
-		"path-to-regexp": "6.2.1"
+		"@discordjs/rest": "1.5.0",
+		"path-to-regexp": "6.2.1",
+		"tweetnacl": "1.0.3"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "17.4.2",
@@ -57,10 +58,9 @@
 		"@nestjs/common": "9.2.1",
 		"@nestjs/core": "9.2.1",
 		"@types/node": "18.11.18",
-		"@typescript-eslint/eslint-plugin": "5.48.1",
-		"@typescript-eslint/parser": "5.48.1",
-		"discord-api-types": "0.37.28",
-		"discord.js": "14.7.1",
+		"@typescript-eslint/eslint-plugin": "5.48.0",
+		"@typescript-eslint/parser": "5.48.0",
+		"discord-api-types": "0.37.26",
 		"eslint": "8.31.0",
 		"eslint-config-prettier": "8.6.0",
 		"eslint-plugin-prettier": "4.2.1",
@@ -78,9 +78,22 @@
 	"peerDependencies": {
 		"@nestjs/common": "^8.0.0 || ^9.0.0",
 		"@nestjs/core": "^8.0.0 || ^9.0.0",
-		"discord.js": "^14.0.1",
 		"reflect-metadata": "^0.1.13",
 		"rxjs": "^7.2.0"
+	},
+	"peerDependenciesMeta": {
+		"@nestjs/common": {
+			"optional": false
+		},
+		"@nestjs/core": {
+			"optional": false
+		},
+		"rxjs": {
+			"optional": false
+		},
+		"reflect-metadata": {
+			"optional": false
+		}
 	},
 	"engines": {
 		"node": ">=16.6.0",

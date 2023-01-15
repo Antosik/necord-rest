@@ -1,9 +1,10 @@
-import { ClientOptions as DiscordClientOptions, Snowflake } from 'discord.js';
 import { ModuleMetadata, Type } from '@nestjs/common';
+import { Snowflake } from 'discord-api-types/globals';
 
-export interface NecordModuleOptions extends DiscordClientOptions {
+export interface NecordModuleOptions {
 	token: string;
-	prefix?: string | Function;
+	publicKey: string;
+	applicationId: string;
 	development?: Snowflake[] | false;
 	skipRegistration?: boolean;
 }

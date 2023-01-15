@@ -1,39 +1,36 @@
+import { Snowflake } from 'discord-api-types/globals';
 import {
+	APIApplicationCommand,
+	APIApplicationCommandOptionBase,
+	APIChatInputApplicationCommandInteraction,
+	APIInteraction,
 	ApplicationCommandOptionType,
 	ApplicationCommandType,
-	AutocompleteInteraction,
-	ChatInputApplicationCommandData,
-	ChatInputCommandInteraction,
-	CommandInteractionOptionResolver,
-	Snowflake
-} from 'discord.js';
+	LocalizationMap
+} from 'discord-api-types/v10';
+import { Reflector } from '@nestjs/core';
 import { OPTIONS_METADATA } from '../../necord.constants';
-import { APIApplicationCommandOptionBase } from 'discord-api-types/payloads/v10/_interactions/_applicationCommands/_chatInput/base';
-import { CommandDiscovery } from '../command.discovery';
+import { CommandDiscovery, BaseApplicationCommandData } from '../command.discovery';
+import { isAutocompleteInteraction, isChatInputInteraction } from './slash-command.utils';
 
-// TODO: Separate to SlashCommandDiscovery, SubcommandGroupDiscovery, SubcommandDiscovery
-// @ts-ignore
-export interface SlashCommandMeta extends ChatInputApplicationCommandData {
-	type?:
-		| ApplicationCommandType.ChatInput
-		| ApplicationCommandOptionType.SubcommandGroup
-		| ApplicationCommandOptionType.Subcommand;
-	guilds?: Snowflake[];
+export interface SlashCommandMeta extends BaseApplicationCommandData {
+	type?: ApplicationCommandType.ChatInput;
+	description: string;
+	description_localizations?: LocalizationMap;
+	options?: APIApplicationCommandOptionBase<ApplicationCommandOptionType>[];
 }
 
-export interface OptionMeta extends APIApplicationCommandOptionBase<any> {
-	resolver?: keyof CommandInteractionOptionResolver;
-}
+export interface OptionMeta extends APIApplicationCommandOptionBase<ApplicationCommandOptionType> {}
 
 export class SlashCommandDiscovery extends CommandDiscovery<SlashCommandMeta> {
-	private readonly subcommands = new Map<string, SlashCommandDiscovery>();
+	private readonly reflector = new Reflector();
+
+	public getGuilds() {
+		return this.meta.guilds;
+	}
 
 	public getDescription() {
 		return this.meta.description;
-	}
-
-	public setCommand(command: SlashCommandDiscovery) {
-		this.subcommands.set(command.getName(), command);
 	}
 
 	public getRawOptions(): Record<string, OptionMeta> {
@@ -41,32 +38,20 @@ export class SlashCommandDiscovery extends CommandDiscovery<SlashCommandMeta> {
 	}
 
 	public getOptions() {
-		if (this.subcommands.size >= 1) {
-			return [...this.subcommands.values()].map(subcommand => subcommand.toJSON());
-		}
-
 		return Object.values(this.getRawOptions());
 	}
 
-	public execute(
-		interaction: ChatInputCommandInteraction | AutocompleteInteraction,
-		depth = 1
-	): any {
-		if (this.subcommands.size >= 1) {
-			const commandName =
-				depth === 2
-					? interaction.options.getSubcommand(true)
-					: interaction.options.getSubcommandGroup(false) ??
-					  interaction.options.getSubcommand(true);
-
-			return this.subcommands.get(commandName)?.execute(interaction, depth + 1);
-		}
-
-		return super.execute([interaction]);
+	public getGlobalId() {
+		return `${this.getName()}`;
 	}
 
-	public isSlashCommand(): this is SlashCommandDiscovery {
-		return true;
+	public isAppliable(
+		interaction: APIInteraction
+	): interaction is APIChatInputApplicationCommandInteraction {
+		return (
+			(isChatInputInteraction(interaction) || isAutocompleteInteraction(interaction)) &&
+			this.getGlobalId() === interaction.data.name
+		);
 	}
 
 	public override toJSON() {

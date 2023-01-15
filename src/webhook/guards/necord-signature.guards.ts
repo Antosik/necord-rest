@@ -1,0 +1,39 @@
+import {
+	Injectable,
+	CanActivate,
+	ExecutionContext,
+	UnauthorizedException,
+	Inject,
+	InternalServerErrorException
+} from '@nestjs/common';
+import { sign } from 'tweetnacl';
+import { NECORD_MODULE_OPTIONS } from '../../necord.constants';
+import { NecordModuleOptions } from '../../necord-options.interface';
+
+@Injectable()
+export class NecordInteractionSignatureGuard implements CanActivate {
+	constructor(@Inject(NECORD_MODULE_OPTIONS) private readonly options: NecordModuleOptions) {}
+
+	async canActivate(context: ExecutionContext): Promise<boolean> {
+		const { headers, rawBody } = context.switchToHttp().getRequest();
+		if (!rawBody) {
+			throw new InternalServerErrorException(
+				`Missing raw body in request. Ensure that 'rawBody' option is set when initializing Nest application.`
+			);
+		}
+
+		const signature = headers['x-signature-ed25519'] as string;
+		const timestamp = headers['x-signature-timestamp'] as string;
+
+		const isValidRequest = sign.detached.verify(
+			Buffer.from(timestamp + rawBody.toString()),
+			Buffer.from(signature, 'hex'),
+			Buffer.from(this.options.publicKey, 'hex')
+		);
+		if (!isValidRequest) {
+			throw new UnauthorizedException('invalid request signature');
+		}
+
+		return true;
+	}
+}

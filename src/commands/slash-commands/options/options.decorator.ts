@@ -1,21 +1,20 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { NecordExecutionContext, SlashCommandContext } from '../../../context';
+import { APIInteraction } from 'discord-api-types/v10';
+import { SlashCommandDiscovery } from '..';
+import { NecordExecutionContext } from '../../../context';
 import { OPTIONS_METADATA } from '../../../necord.constants';
+import { isChatInputInteraction } from '../slash-command.utils';
 
 export const Options = createParamDecorator(
 	(_, context: ExecutionContext) => {
 		const necordContext = NecordExecutionContext.create(context);
-		const [interaction] = necordContext.getContext<SlashCommandContext>();
-		const discovery = necordContext.getDiscovery();
+		const interaction = necordContext.getContext<APIInteraction>();
+		const discovery = necordContext.getDiscovery() as SlashCommandDiscovery;
 
-		if (!discovery.isSlashCommand()) return null;
+		if (!isChatInputInteraction(interaction)) return null;
 
 		return Object.entries(discovery.getRawOptions()).reduce((acc, [parameter, option]) => {
-			acc[parameter] = interaction.options[option.resolver].call(
-				interaction.options,
-				option.name,
-				!!option.required
-			);
+			acc[parameter] = interaction.data.options.find(el => el.name === option.name);
 			return acc;
 		}, {});
 	},

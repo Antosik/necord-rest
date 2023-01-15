@@ -1,24 +1,20 @@
-import { Reflector } from '@nestjs/core';
-import { ContextMenuDiscovery, SlashCommandDiscovery } from '../commands';
-import { MessageComponentDiscovery } from '../message-components';
-import { ListenerDiscovery } from '../listeners';
-import { TextCommandDiscovery } from '../text-commands';
-import { ModalDiscovery } from '../modals';
+import { APIInteraction } from 'discord-api-types/v10';
 
 interface DiscoveredItem {
 	class: any;
 	handler?: (...args: any[]) => any;
 }
 
-// TODO: Move TypeGuards to ExecutionContext
 export abstract class NecordBaseDiscovery<T = any> {
-	protected readonly reflector = new Reflector();
-
 	protected discovery: DiscoveredItem;
 
 	protected contextCallback: Function;
 
 	public constructor(protected readonly meta: T) {}
+
+	public abstract isAppliable(interaction: APIInteraction): boolean;
+
+	public abstract getGlobalId(interaction: APIInteraction): string;
 
 	public getClass() {
 		return this.discovery.class;
@@ -36,32 +32,8 @@ export abstract class NecordBaseDiscovery<T = any> {
 		this.contextCallback ??= fn;
 	}
 
-	public execute(context: any = []) {
-		return this.contextCallback(context, this);
-	}
-
-	public isContextMenu(): this is ContextMenuDiscovery {
-		return false;
-	}
-
-	public isSlashCommand(): this is SlashCommandDiscovery {
-		return false;
-	}
-
-	public isMessageComponent(): this is MessageComponentDiscovery {
-		return false;
-	}
-
-	public isListener(): this is ListenerDiscovery {
-		return false;
-	}
-
-	public isTextCommand(): this is TextCommandDiscovery {
-		return false;
-	}
-
-	public isModal(): this is ModalDiscovery {
-		return false;
+	public execute(interaction: APIInteraction) {
+		return this.contextCallback(interaction, this);
 	}
 
 	public abstract toJSON(): Record<string, any>;

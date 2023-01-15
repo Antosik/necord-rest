@@ -1,7 +1,9 @@
-import { ApplicationCommandOptionType, APIApplicationCommandAttachmentOption } from 'discord.js';
+import {
+	APIApplicationCommandAttachmentOption,
+	ApplicationCommandOptionType
+} from 'discord-api-types/v10';
 import { createOptionDecorator } from './option.util';
 
 export const AttachmentOption = createOptionDecorator<APIApplicationCommandAttachmentOption>(
-	ApplicationCommandOptionType.Attachment,
-	'getAttachment'
+	ApplicationCommandOptionType.Attachment
 );

@@ -1,16 +1,14 @@
-import { APIApplicationCommandOptionBase } from 'discord-api-types/payloads/v10/_interactions/_applicationCommands/_chatInput/base';
-import { ApplicationCommandOptionType } from 'discord.js';
+import {
+	APIApplicationCommandOptionBase,
+	ApplicationCommandOptionType
+} from 'discord-api-types/v10';
 import { OptionMeta } from '../slash-command.discovery';
-import { DistributiveOmit } from 'discord-api-types/utils/internals';
 import { OPTIONS_METADATA } from '../../../necord.constants';
 
-export function createOptionDecorator<T extends APIApplicationCommandOptionBase<any>>(
-	type: ApplicationCommandOptionType,
-	resolver: OptionMeta['resolver']
-) {
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	return (data: DistributiveOmit<T, 'type'>): PropertyDecorator => {
+export function createOptionDecorator<
+	T extends APIApplicationCommandOptionBase<ApplicationCommandOptionType>
+>(type: ApplicationCommandOptionType) {
+	return (data: Omit<T, 'type'>): PropertyDecorator => {
 		return (target: any, propertyKey: string | symbol) => {
 			Reflect.defineProperty(target, propertyKey, {
 				value: undefined,
@@ -20,8 +18,7 @@ export function createOptionDecorator<T extends APIApplicationCommandOptionBase<
 
 			const meta: OptionMeta = {
 				...data,
-				type,
-				resolver
+				type
 			};
 
 			Reflect.defineMetadata(OPTIONS_METADATA, meta, target, propertyKey);

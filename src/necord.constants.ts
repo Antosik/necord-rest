@@ -1,7 +1,6 @@
 export const NECORD_MODULE_OPTIONS = 'necord:module_options';
+export const NECORD_WEBHOOK_SERVICE = 'necord:webhook_service';
 
-export const LISTENERS_METADATA = 'necord:listeners_meta';
-export const TEXT_COMMAND_METADATA = 'necord:text_command_meta';
 export const CONTEXT_MENU_METADATA = 'necord:context_menu_meta';
 export const SLASH_COMMAND_METADATA = 'necord:slash_command_meta';
 export const SUBCOMMAND_METADATA = 'necord:slash_subcommand_meta';
