@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { APIInteraction } from 'discord-api-types/v10';
+import { APIInteraction, APIInteractionDataOptionBase } from 'discord-api-types/v10';
 
 import { NecordExecutionContext } from '../../../context/necord-execution-context';
 import { OPTIONS_METADATA } from '../../../necord.constants';
@@ -15,7 +15,9 @@ export const Options = createParamDecorator(
 		if (!isChatInputInteraction(interaction)) return null;
 
 		return Object.entries(discovery.getRawOptions()).reduce((acc, [parameter, option]) => {
-			acc[parameter] = interaction.data.options.find(el => el.name === option.name);
+			acc[parameter] = interaction.data.options.find<APIInteractionDataOptionBase<any, any>>(
+				(el): el is APIInteractionDataOptionBase<any, any> => el.name === option.name
+			)?.value;
 			return acc;
 		}, {});
 	},
