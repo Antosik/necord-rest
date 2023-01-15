@@ -20,8 +20,8 @@ import {
 	MessageComponentDiscovery,
 	ModalDiscovery,
 	SlashCommandDiscovery
-} from './commands';
-import { NecordBaseDiscovery, NecordContextType, NecordParamsFactory } from './context';
+} from './commands/private';
+import { NecordBaseDiscovery, NecordContextType, NecordParamsFactory } from './context/private';
 import { NecordModuleOptions } from './necord-options.interface';
 import {
 	NECORD_MODULE_OPTIONS,

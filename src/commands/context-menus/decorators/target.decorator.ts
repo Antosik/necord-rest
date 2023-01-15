@@ -5,7 +5,7 @@ import {
 	APIUserInteractionDataResolved
 } from 'discord-api-types/v10';
 
-import { NecordExecutionContext } from '../../../context';
+import { NecordExecutionContext } from '../../../context/necord-execution-context';
 import {
 	isMessageContextMenuInteraction,
 	isUserContextMenuInteraction

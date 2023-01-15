@@ -2,7 +2,7 @@ import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nes
 import { APIApplicationCommandAutocompleteResponse, APIInteraction } from 'discord-api-types/v10';
 import { Observable, of } from 'rxjs';
 
-import { NecordExecutionContext } from '../../../context';
+import { NecordExecutionContext } from '../../../context/necord-execution-context';
 import { isAutocompleteInteraction } from '../slash-command.utils';
 
 @Injectable()

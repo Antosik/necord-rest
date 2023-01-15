@@ -1,8 +1,8 @@
 import { ArgumentsHost } from '@nestjs/common';
 import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-host';
 
+import { NecordBaseDiscovery } from './necord-base.discovery';
 import { NecordContextType } from './necord-execution-context';
-import { NecordBaseDiscovery } from '../context';
 
 export class NecordArgumentsHost extends ExecutionContextHost {
 	public static create(context: ArgumentsHost): NecordArgumentsHost {

@@ -8,8 +8,8 @@ import {
 } from '@nestjs/common';
 import { sign } from 'tweetnacl';
 
-import { NecordModuleOptions } from '../../necord-options.interface';
-import { NECORD_MODULE_OPTIONS } from '../../necord.constants';
+import { NecordModuleOptions } from '../necord-options.interface';
+import { NECORD_MODULE_OPTIONS } from '../necord.constants';
 
 @Injectable()
 export class NecordInteractionSignatureGuard implements CanActivate {

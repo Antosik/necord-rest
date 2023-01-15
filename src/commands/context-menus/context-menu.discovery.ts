@@ -1,21 +1,8 @@
-import {
-	APIContextMenuInteraction,
-	APIInteraction,
-	ApplicationCommandType
-} from 'discord-api-types/v10';
+import { APIContextMenuInteraction, APIInteraction } from 'discord-api-types/v10';
 
+import { ContextMenuMeta } from './context-menu.interface';
 import { isContextMenuInteraction } from './context-menu.utils';
-import { BaseApplicationCommandData, CommandDiscovery } from '../command.discovery';
-
-export interface MessageApplicationCommandData extends BaseApplicationCommandData {
-	type: ApplicationCommandType.Message;
-}
-
-export interface UserApplicationCommandData extends BaseApplicationCommandData {
-	type: ApplicationCommandType.User;
-}
-
-export type ContextMenuMeta = MessageApplicationCommandData | UserApplicationCommandData;
+import { CommandDiscovery } from '../command.discovery';
 
 export class ContextMenuDiscovery extends CommandDiscovery<ContextMenuMeta> {
 	public getType() {

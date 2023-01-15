@@ -1,8 +1,8 @@
 import { createParamDecorator } from '@nestjs/common';
 import { APIInteraction } from 'discord-api-types/v10';
 
-import { NecordExecutionContext } from '../../../context';
-import { isModalSubmitInteraction } from '../modals.utils';
+import { NecordExecutionContext } from '../../../context/necord-execution-context';
+import { isModalSubmitInteraction } from '../modal.utils';
 
 export const Fields = createParamDecorator((customId, context) => {
 	const necordContext = NecordExecutionContext.create(context);
