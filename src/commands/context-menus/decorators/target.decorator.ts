@@ -1,10 +1,11 @@
 import { createParamDecorator } from '@nestjs/common';
-import { NecordExecutionContext } from '../../../context';
 import {
 	APIInteraction,
 	APIMessageApplicationCommandInteractionDataResolved,
 	APIUserInteractionDataResolved
 } from 'discord-api-types/v10';
+
+import { NecordExecutionContext } from '../../../context';
 import {
 	isMessageContextMenuInteraction,
 	isUserContextMenuInteraction

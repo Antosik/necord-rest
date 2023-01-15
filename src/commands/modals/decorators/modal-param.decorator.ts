@@ -1,7 +1,8 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { NecordExecutionContext } from '../../../context';
 import { APIInteraction } from 'discord-api-types/v10';
-import { ModalDiscovery } from '..';
+
+import { NecordExecutionContext } from '../../../context';
+import { ModalDiscovery } from '../modal.discovery';
 
 export const ModalParam = createParamDecorator((data, ctx: ExecutionContext) => {
 	const necordContext = NecordExecutionContext.create(ctx);

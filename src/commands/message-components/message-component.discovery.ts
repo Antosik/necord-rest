@@ -4,8 +4,9 @@ import {
 	APIInteraction
 } from 'discord-api-types/v10';
 import { match } from 'path-to-regexp';
-import { NecordBaseDiscovery } from '../../context';
+
 import { isMessageComponentInteraction } from './message-component.utils';
+import { NecordBaseDiscovery } from '../../context';
 
 export interface MessageComponentMeta {
 	type: APIMessageComponentInteractionData['component_type'];

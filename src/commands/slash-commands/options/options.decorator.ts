@@ -1,8 +1,9 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { APIInteraction } from 'discord-api-types/v10';
-import { SlashCommandDiscovery } from '..';
+
 import { NecordExecutionContext } from '../../../context';
 import { OPTIONS_METADATA } from '../../../necord.constants';
+import { SlashCommandDiscovery } from '../slash-command.discovery';
 import { isChatInputInteraction } from '../slash-command.utils';
 
 export const Options = createParamDecorator(

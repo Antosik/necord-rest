@@ -2,8 +2,9 @@ import {
 	APIApplicationCommandOptionBase,
 	ApplicationCommandOptionType
 } from 'discord-api-types/v10';
-import { OptionMeta } from '../slash-command.discovery';
+
 import { OPTIONS_METADATA } from '../../../necord.constants';
+import { OptionMeta } from '../slash-command.discovery';
 
 export function createOptionDecorator<
 	T extends APIApplicationCommandOptionBase<ApplicationCommandOptionType>

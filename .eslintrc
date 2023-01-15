@@ -1,4 +1,5 @@
 {
+	"root": true,
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"project": "tsconfig.json",
@@ -8,11 +9,11 @@
 		"@typescript-eslint/eslint-plugin"
 	],
 	"extends": [
-		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"prettier"
+		"plugin:prettier/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
 	],
-	"root": true,
 	"env": {
 		"node": true
 	},
@@ -23,7 +24,31 @@
 		"@typescript-eslint/explicit-module-boundary-types": "off",
 		"@typescript-eslint/no-unused-vars": "off",
 		"@typescript-eslint/ban-types": "off",
-		"@typescript-eslint/no-empty-interface": "off"
+		"@typescript-eslint/no-empty-interface": "off",
+		"import/order": [
+			"error",
+			{
+				"pathGroups": [
+					{
+						"pattern": "@nestjs/**",
+						"group": "builtin"
+					}
+				],
+				"newlines-between": "always",
+				"alphabetize": {
+					"order": "asc"
+				},
+				"groups": [
+					"type",
+					"builtin",
+					"external",
+					[
+						"parent",
+						"sibling",
+						"index"
+					]
+				]
+			}
+		]
 	}
 }
-

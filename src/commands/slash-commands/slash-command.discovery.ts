@@ -1,3 +1,4 @@
+import { Reflector } from '@nestjs/core';
 import { Snowflake } from 'discord-api-types/globals';
 import {
 	APIApplicationCommand,
@@ -8,10 +9,10 @@ import {
 	ApplicationCommandType,
 	LocalizationMap
 } from 'discord-api-types/v10';
-import { Reflector } from '@nestjs/core';
+
+import { isAutocompleteInteraction, isChatInputInteraction } from './slash-command.utils';
 import { OPTIONS_METADATA } from '../../necord.constants';
 import { CommandDiscovery, BaseApplicationCommandData } from '../command.discovery';
-import { isAutocompleteInteraction, isChatInputInteraction } from './slash-command.utils';
 
 export interface SlashCommandMeta extends BaseApplicationCommandData {
 	type?: ApplicationCommandType.ChatInput;

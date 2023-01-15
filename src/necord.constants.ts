@@ -9,4 +9,3 @@ export const MESSAGE_COMPONENT_METADATA = 'necord:message_component_meta';
 export const MODAL_METADATA = 'necord:modal_meta';
 
 export const OPTIONS_METADATA = 'necord:options_meta';
-export const GUILDS_METADATA = 'necord:guilds_meta';

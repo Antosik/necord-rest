@@ -1,5 +1,6 @@
-import { match } from 'path-to-regexp';
 import { APIInteraction, APIModalSubmitInteraction } from 'discord-api-types/v10';
+import { match } from 'path-to-regexp';
+
 import { isModalSubmitInteraction } from './modals.utils';
 import { NecordBaseDiscovery } from '../../context';
 

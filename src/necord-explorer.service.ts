@@ -1,11 +1,11 @@
-import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { DiscoveryService, MetadataScanner, Reflector } from '@nestjs/core';
-import { ParamMetadata } from '@nestjs/core/helpers/interfaces';
-import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
-import { STATIC_CONTEXT } from '@nestjs/core/injector/constants';
-import { ExternalContextCreator } from '@nestjs/core/helpers/external-context-creator';
-import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants';
 import { REST } from '@discordjs/rest';
+import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { ROUTE_ARGS_METADATA } from '@nestjs/common/constants';
+import { DiscoveryService, MetadataScanner, Reflector } from '@nestjs/core';
+import { ExternalContextCreator } from '@nestjs/core/helpers/external-context-creator';
+import { ParamMetadata } from '@nestjs/core/helpers/interfaces';
+import { STATIC_CONTEXT } from '@nestjs/core/injector/constants';
+import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
 import {
 	APIInteraction,
 	APIInteractionResponse,
@@ -13,14 +13,7 @@ import {
 	InteractionType,
 	Routes
 } from 'discord-api-types/v10';
-import {
-	NECORD_WEBHOOK_SERVICE,
-	CONTEXT_MENU_METADATA,
-	MESSAGE_COMPONENT_METADATA,
-	MODAL_METADATA,
-	SLASH_COMMAND_METADATA
-} from './necord.constants';
-import { NecordBaseDiscovery, NecordContextType, NecordParamsFactory } from './context';
+
 import {
 	CommandDiscovery,
 	ContextMenuDiscovery,
@@ -28,8 +21,16 @@ import {
 	ModalDiscovery,
 	SlashCommandDiscovery
 } from './commands';
-import { NECORD_MODULE_OPTIONS } from '.';
+import { NecordBaseDiscovery, NecordContextType, NecordParamsFactory } from './context';
 import { NecordModuleOptions } from './necord-options.interface';
+import {
+	NECORD_MODULE_OPTIONS,
+	NECORD_WEBHOOK_SERVICE,
+	CONTEXT_MENU_METADATA,
+	MESSAGE_COMPONENT_METADATA,
+	MODAL_METADATA,
+	SLASH_COMMAND_METADATA
+} from './necord.constants';
 import { wait } from './utils';
 
 @Injectable()

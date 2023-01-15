@@ -1,7 +1,8 @@
 import { SetMetadata } from '@nestjs/common';
 import { ApplicationCommandType } from 'discord-api-types/v10';
-import { SlashCommandDiscovery, SlashCommandMeta } from '../slash-command.discovery';
+
 import { SLASH_COMMAND_METADATA } from '../../../necord.constants';
+import { SlashCommandDiscovery, SlashCommandMeta } from '../slash-command.discovery';
 
 export const SlashCommand = (options: Omit<SlashCommandMeta, 'type'>): MethodDecorator =>
 	SetMetadata<string, SlashCommandDiscovery>(

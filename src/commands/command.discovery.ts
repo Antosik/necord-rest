@@ -1,5 +1,6 @@
 import { Permissions, Snowflake } from 'discord-api-types/globals';
 import { LocalizationMap } from 'discord-api-types/v10';
+
 import { NecordBaseDiscovery } from '../context';
 
 export interface BaseApplicationCommandData {

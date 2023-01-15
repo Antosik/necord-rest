@@ -2,12 +2,12 @@ import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
 import { DiscoveryModule } from '@nestjs/core';
 
 import { ExplorerService } from './necord-explorer.service';
-import { NECORD_MODULE_OPTIONS } from './necord.constants';
 import {
 	NecordModuleAsyncOptions,
 	NecordModuleOptions,
 	NecordOptionsFactory
 } from './necord-options.interface';
+import { NECORD_MODULE_OPTIONS } from './necord.constants';
 
 @Global()
 @Module({
