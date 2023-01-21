@@ -7,6 +7,7 @@ import {
 	APIMessageComponentButtonInteraction,
 	APIMessageComponentInteraction,
 	APIMessageComponentSelectMenuInteraction,
+	APIModalSubmitInteraction,
 	APIPingInteraction,
 	APIUserApplicationCommandInteraction,
 	ApplicationCommandType,
@@ -183,3 +184,13 @@ export const messageComponentMentionableSelectMenuInteraction: APIMessageCompone
 			}
 		}
 	};
+
+export const modalSubmitInteraction: APIModalSubmitInteraction = {
+	...partialInteraction,
+	type: InteractionType.ModalSubmit,
+	locale: 'en-US',
+	data: {
+		custom_id: '1',
+		components: []
+	}
+};
