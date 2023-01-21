@@ -1,12 +1,17 @@
 {
   "moduleFileExtensions": ["js", "json", "ts"],
-  "rootDir": "./tests",
+  "rootDir": "./",
+  "roots": ["./tests"],
   "testEnvironment": "node",
   "testRegex": ".spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": [
       "ts-jest",
-      { "tsconfig": "<rootDir>/../tsconfig.json", "isolatedModules": true }
+      { "tsconfig": "<rootDir>/tsconfig.json", "isolatedModules": true }
     ]
-  }
+  },
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.ts",
+    "!**/node_modules/**"
+  ]
 }
