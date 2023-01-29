@@ -24,15 +24,26 @@ export class NecordInteractionSignatureGuard implements CanActivate {
 		}
 
 		const signature = headers['x-signature-ed25519'] as string;
-		const timestamp = headers['x-signature-timestamp'] as string;
+		if (!signature) {
+			throw new UnauthorizedException('empty request signature');
+		}
 
-		const isValidRequest = sign.detached.verify(
-			Buffer.from(timestamp + rawBody.toString()),
-			Buffer.from(signature, 'hex'),
-			Buffer.from(this.options.publicKey, 'hex')
-		);
-		if (!isValidRequest) {
-			throw new UnauthorizedException('invalid request signature');
+		const timestamp = headers['x-signature-timestamp'] as string;
+		if (!timestamp) {
+			throw new UnauthorizedException('empty request signature timestamp');
+		}
+
+		try {
+			const isValidRequest = sign.detached.verify(
+				Buffer.from(timestamp + rawBody.toString()),
+				Buffer.from(signature, 'hex'),
+				Buffer.from(this.options.publicKey, 'hex')
+			);
+			if (!isValidRequest) {
+				throw new UnauthorizedException('invalid request signature');
+			}
+		} catch (err) {
+			throw new UnauthorizedException(err);
 		}
 
 		return true;
