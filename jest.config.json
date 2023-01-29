@@ -10,6 +10,7 @@
       { "tsconfig": "<rootDir>/tsconfig.json", "isolatedModules": true }
     ]
   },
+  "setupFiles": ["./tests/setup.ts"],
   "collectCoverageFrom": [
     "<rootDir>/src/**/*.ts",
     "!**/node_modules/**"
