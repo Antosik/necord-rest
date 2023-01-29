@@ -1,11 +1,4 @@
 import {
-	ApplicationCommandType,
-	InteractionType,
-	APIChatInputApplicationCommandInteraction,
-	APIUserApplicationCommandInteraction
-} from 'discord-api-types/v10';
-
-import {
 	isContextMenuInteraction,
 	isMessageContextMenuInteraction,
 	isUserContextMenuInteraction
@@ -15,7 +8,7 @@ import {
 	messageApplicationCommandInteraction,
 	pingInteraction,
 	userApplicationCommandInteraction
-} from '../../utils/interactions';
+} from '../../../utils/interactions';
 
 describe('Context Menus > Utils', () => {
 	describe('isContextMenuInteraction', () => {

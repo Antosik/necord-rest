@@ -14,7 +14,7 @@ import {
 	messageComponentStringSelectMenuInteraction,
 	messageComponentUserSelectMenuInteraction,
 	pingInteraction
-} from '../../utils/interactions';
+} from '../../../utils/interactions';
 
 describe('Message Components > Utils', () => {
 	describe('isMessageComponentInteraction', () => {

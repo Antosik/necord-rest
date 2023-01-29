@@ -7,7 +7,7 @@ import {
 	chatInputApplicationCommandInteraction,
 	pingInteraction,
 	userApplicationCommandInteraction
-} from '../../utils/interactions';
+} from '../../../utils/interactions';
 
 describe('Slash Commands > Utils', () => {
 	describe('isChatInputInteraction', () => {

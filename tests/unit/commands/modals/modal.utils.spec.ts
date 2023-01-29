@@ -1,5 +1,5 @@
 import { isModalSubmitInteraction } from '../../../../src/commands/modals/modal.utils';
-import { modalSubmitInteraction, pingInteraction } from '../../utils/interactions';
+import { modalSubmitInteraction, pingInteraction } from '../../../utils/interactions';
 
 describe('Modals > Utils', () => {
 	describe('isModalSubmitInteraction', () => {

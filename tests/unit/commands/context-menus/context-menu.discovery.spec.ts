@@ -2,7 +2,7 @@ import { ApplicationCommandType } from 'discord-api-types/v10';
 
 import { ContextMenuMeta } from '../../../../src/commands/context-menus/context-menu.interface';
 import { ContextMenuDiscovery } from '../../../../src/commands/private';
-import { pingInteraction, userApplicationCommandInteraction } from '../../utils/interactions';
+import { pingInteraction, userApplicationCommandInteraction } from '../../../utils/interactions';
 
 describe('Context Menus > Discovery', () => {
 	const meta: ContextMenuMeta = {

@@ -3,6 +3,7 @@ import {
 	APIApplicationCommandInteraction,
 	APIChatInputApplicationCommandInteraction,
 	APIInteraction,
+	APIInteractionDataResolvedGuildMember,
 	APIMessage,
 	APIMessageApplicationCommandInteraction,
 	APIMessageComponentButtonInteraction,
@@ -10,6 +11,7 @@ import {
 	APIMessageComponentSelectMenuInteraction,
 	APIModalSubmitInteraction,
 	APIPingInteraction,
+	APIUser,
 	APIUserApplicationCommandInteraction,
 	ApplicationCommandType,
 	ComponentType,
@@ -17,7 +19,10 @@ import {
 	MessageType
 } from 'discord-api-types/v10';
 
-const partialInteraction: Pick<APIInteraction, 'id' | 'application_id' | 'token' | 'version'> = {
+export const partialInteraction: Pick<
+	APIInteraction,
+	'id' | 'application_id' | 'token' | 'version'
+> = {
 	id: '1',
 	application_id: '1',
 	token: 'token',
@@ -29,7 +34,7 @@ export const pingInteraction: APIPingInteraction = {
 	type: InteractionType.Ping
 };
 
-const partialApplicationCommandInteraction: Pick<
+export const partialApplicationCommandInteraction: Pick<
 	APIApplicationCommandInteraction,
 	'type' | 'locale' | 'channel_id' | 'app_permissions'
 > = {
@@ -49,6 +54,21 @@ export const chatInputApplicationCommandInteraction: APIChatInputApplicationComm
 	}
 };
 
+export const user: APIUser = {
+	id: '1',
+	username: 'user',
+	discriminator: '1234',
+	avatar: ''
+};
+
+export const guildMember: APIInteractionDataResolvedGuildMember = {
+	permissions: '',
+	roles: [],
+	nick: 'guildMember',
+	avatar: '',
+	joined_at: new Date().toISOString()
+};
+
 export const userApplicationCommandInteraction: APIUserApplicationCommandInteraction = {
 	...partialInteraction,
 	...partialApplicationCommandInteraction,
@@ -58,26 +78,17 @@ export const userApplicationCommandInteraction: APIUserApplicationCommandInterac
 		name: 'user',
 		target_id: '1',
 		resolved: {
-			users: {}
+			users: {
+				'1': user
+			},
+			members: {
+				'1': guildMember
+			}
 		}
 	}
 };
 
-export const messageApplicationCommandInteraction: APIMessageApplicationCommandInteraction = {
-	...partialInteraction,
-	...partialApplicationCommandInteraction,
-	data: {
-		type: ApplicationCommandType.Message,
-		id: '1',
-		name: 'message',
-		target_id: '1',
-		resolved: {
-			messages: {}
-		}
-	}
-};
-
-const message: APIMessage = {
+export const message: APIMessage = {
 	id: '1',
 	channel_id: '1',
 	author: {
@@ -94,9 +105,26 @@ const message: APIMessage = {
 	mentions: [],
 	mention_roles: [],
 	attachments: [],
+	components: [],
 	embeds: [],
 	pinned: false,
 	type: MessageType.Default
+};
+
+export const messageApplicationCommandInteraction: APIMessageApplicationCommandInteraction = {
+	...partialInteraction,
+	...partialApplicationCommandInteraction,
+	data: {
+		type: ApplicationCommandType.Message,
+		id: '1',
+		name: 'message',
+		target_id: '1',
+		resolved: {
+			messages: {
+				'1': message
+			}
+		}
+	}
 };
 
 const partialMessageComponentInteraction: Pick<APIMessageComponentInteraction, 'type' | 'message'> =
