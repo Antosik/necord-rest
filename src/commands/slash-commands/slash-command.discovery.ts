@@ -9,10 +9,6 @@ import { CommandDiscovery } from '../command.discovery';
 export class SlashCommandDiscovery extends CommandDiscovery<SlashCommandMeta> {
 	private readonly reflector = new Reflector();
 
-	public getGuilds() {
-		return this.meta.guilds;
-	}
-
 	public getDescription() {
 		return this.meta.description;
 	}

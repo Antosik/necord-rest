@@ -1,4 +1,5 @@
 import {
+	APIApplicationCommandAutocompleteInteraction,
 	APIApplicationCommandInteraction,
 	APIChatInputApplicationCommandInteraction,
 	APIInteraction,
@@ -194,3 +195,16 @@ export const modalSubmitInteraction: APIModalSubmitInteraction = {
 		components: []
 	}
 };
+
+export const applicationCommandAutocompleteInteraction: APIApplicationCommandAutocompleteInteraction =
+	{
+		...partialInteraction,
+		type: InteractionType.ApplicationCommandAutocomplete,
+		locale: 'en-US',
+		data: {
+			id: '1',
+			type: ApplicationCommandType.ChatInput,
+			name: 'data',
+			options: []
+		}
+	};
