@@ -1,7 +1,7 @@
 import { ComponentType } from 'discord-api-types/v10';
 
-import { MessageComponentMeta } from '../../../src/commands/message-components/message-component.interface';
-import { MessageComponentDiscovery } from '../../../src/commands/private';
+import { MessageComponentMeta } from '../../../../src/commands/message-components/message-component.interface';
+import { MessageComponentDiscovery } from '../../../../src/commands/private';
 import { messageComponentButtonInteraction, pingInteraction } from '../../utils/interactions';
 
 describe('Message Components > Discovery', () => {

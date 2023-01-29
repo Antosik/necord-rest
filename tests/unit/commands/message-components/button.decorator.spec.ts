@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ComponentType } from 'discord-api-types/v10';
 
-import { Button } from '../../../src';
-import { MessageComponentMeta } from '../../../src/commands/message-components/message-component.interface';
-import { MESSAGE_COMPONENT_METADATA } from '../../../src/necord.constants';
+import { Button } from '../../../../src';
+import { MessageComponentMeta } from '../../../../src/commands/message-components/message-component.interface';
+import { MESSAGE_COMPONENT_METADATA } from '../../../../src/necord.constants';
 
 describe('Message Components > Button Decorator', () => {
 	const meta: Omit<MessageComponentMeta, 'type'> = {

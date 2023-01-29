@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ApplicationCommandType } from 'discord-api-types/v10';
 
-import { MessageCommand } from '../../../src';
-import { ContextMenuMeta } from '../../../src/commands/context-menus/context-menu.interface';
-import { CONTEXT_MENU_METADATA } from '../../../src/necord.constants';
+import { MessageCommand } from '../../../../src';
+import { ContextMenuMeta } from '../../../../src/commands/context-menus/context-menu.interface';
+import { CONTEXT_MENU_METADATA } from '../../../../src/necord.constants';
 
 describe('Context Menus > MessageCommand Decorator', () => {
 	const meta: Omit<ContextMenuMeta, 'type'> = {

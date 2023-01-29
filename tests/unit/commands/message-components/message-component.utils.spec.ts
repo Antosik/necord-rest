@@ -5,7 +5,7 @@ import {
 	isRoleSelectComponentInteraction,
 	isStringSelectComponentInteraction,
 	isUserSelectComponentInteraction
-} from '../../../src/commands/message-components/message-component.utils';
+} from '../../../../src/commands/message-components/message-component.utils';
 import {
 	messageComponentButtonInteraction,
 	messageComponentChannelSelectMenuInteraction,

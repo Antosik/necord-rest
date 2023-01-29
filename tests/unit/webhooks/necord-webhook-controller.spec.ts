@@ -3,9 +3,9 @@ import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { sign } from 'tweetnacl';
 
-import { NecordWebhookController } from '../../src';
-import { NecordModuleOptions } from '../../src/necord-options.interface';
-import { NECORD_MODULE_OPTIONS } from '../../src/necord.constants';
+import { NecordWebhookController } from '../../../src';
+import { NecordModuleOptions } from '../../../src/necord-options.interface';
+import { NECORD_MODULE_OPTIONS } from '../../../src/necord.constants';
 
 @Injectable()
 @Controller('/')

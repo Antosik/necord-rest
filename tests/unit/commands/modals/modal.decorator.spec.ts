@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { Modal } from '../../../src';
-import { ModalMeta } from '../../../src/commands/modals/modal.interface';
-import { MODAL_METADATA } from '../../../src/necord.constants';
+import { Modal } from '../../../../src';
+import { ModalMeta } from '../../../../src/commands/modals/modal.interface';
+import { MODAL_METADATA } from '../../../../src/necord.constants';
 
 describe('Modals > Modal Decorator', () => {
 	const meta: Omit<ModalMeta, 'type'> = {

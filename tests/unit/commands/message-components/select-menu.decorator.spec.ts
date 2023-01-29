@@ -7,9 +7,9 @@ import {
 	RoleSelect,
 	StringSelect,
 	UserSelect
-} from '../../../src';
-import { MessageComponentMeta } from '../../../src/commands/message-components/message-component.interface';
-import { MESSAGE_COMPONENT_METADATA } from '../../../src/necord.constants';
+} from '../../../../src';
+import { MessageComponentMeta } from '../../../../src/commands/message-components/message-component.interface';
+import { MESSAGE_COMPONENT_METADATA } from '../../../../src/necord.constants';
 
 describe('Message Components > Select Menu Decorator', () => {
 	describe('StringSelect', () => {

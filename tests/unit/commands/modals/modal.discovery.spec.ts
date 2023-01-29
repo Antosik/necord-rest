@@ -1,5 +1,5 @@
-import { ModalMeta } from '../../../src/commands/modals/modal.interface';
-import { ModalDiscovery } from '../../../src/commands/private';
+import { ModalMeta } from '../../../../src/commands/modals/modal.interface';
+import { ModalDiscovery } from '../../../../src/commands/private';
 import { modalSubmitInteraction, pingInteraction } from '../../utils/interactions';
 
 describe('Modals > Discovery', () => {

@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 
-import { NecordModule } from '../src';
-import { ExplorerService } from '../src/necord-explorer.service';
-import { NecordOptionsFactory, NecordModuleOptions } from '../src/necord-options.interface';
+import { NecordModule } from '../../src';
+import { ExplorerService } from '../../src/necord-explorer.service';
+import { NecordOptionsFactory, NecordModuleOptions } from '../../src/necord-options.interface';
 
 describe('NecordModule', () => {
 	const defaultNecordOptions: NecordModuleOptions = {

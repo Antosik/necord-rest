@@ -1,7 +1,7 @@
 import {
 	isAutocompleteInteraction,
 	isChatInputInteraction
-} from '../../../src/commands/slash-commands/slash-command.utils';
+} from '../../../../src/commands/slash-commands/slash-command.utils';
 import {
 	applicationCommandAutocompleteInteraction,
 	chatInputApplicationCommandInteraction,

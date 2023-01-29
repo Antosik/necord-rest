@@ -1,5 +1,5 @@
-import { SlashCommandDiscovery } from '../../../src/commands/private';
-import { SlashCommandMeta } from '../../../src/commands/slash-commands/slash-command.interface';
+import { SlashCommandDiscovery } from '../../../../src/commands/private';
+import { SlashCommandMeta } from '../../../../src/commands/slash-commands/slash-command.interface';
 import { chatInputApplicationCommandInteraction, pingInteraction } from '../../utils/interactions';
 
 describe('Slash Commands > Discovery', () => {

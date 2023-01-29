@@ -3,8 +3,8 @@ import {
 	ApplicationCommandOptionType
 } from 'discord-api-types/v10';
 
-import { createOptionDecorator } from '../../../../src/commands/slash-commands/options/option.util';
-import { OPTIONS_METADATA } from '../../../../src/necord.constants';
+import { createOptionDecorator } from '../../../../../src/commands/slash-commands/options/option.util';
+import { OPTIONS_METADATA } from '../../../../../src/necord.constants';
 
 describe('Slash Commands > Options > createOptionDecorator', () => {
 	it('should set option meta', () => {

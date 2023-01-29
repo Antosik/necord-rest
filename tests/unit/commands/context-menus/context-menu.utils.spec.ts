@@ -9,7 +9,7 @@ import {
 	isContextMenuInteraction,
 	isMessageContextMenuInteraction,
 	isUserContextMenuInteraction
-} from '../../../src/commands/context-menus/context-menu.utils';
+} from '../../../../src/commands/context-menus/context-menu.utils';
 import {
 	chatInputApplicationCommandInteraction,
 	messageApplicationCommandInteraction,
