@@ -2,7 +2,7 @@
 	"root": true,
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
-		"project": "tsconfig.json",
+		"project": "./tsconfig.json",
 		"sourceType": "module"
 	},
 	"plugins": [
@@ -15,7 +15,8 @@
     "plugin:import/typescript"
 	],
 	"env": {
-		"node": true
+		"node": true,
+		"jest": true
 	},
 	"rules": {
 		"@typescript-eslint/interface-name-prefix": "off",
